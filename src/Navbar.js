@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import VerNLUs from "./VerNLUs";
@@ -11,12 +11,11 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import logo from './img/logo.png';
 import * as stateActions from "./app/actions/StateActions";
-
 import './styles.css'
 
 const NavbarList = () => {
   const location = useLocation().pathname
-
+  
   const list = () => {
     return(
       <div>
@@ -63,6 +62,8 @@ const NavbarButton = () => {
 
 
 export default function Navbar() {
+  let valor = document.cookie.split("token=");
+  const cookie = useState(valor[1]);
   return (
     <Router>
       <div className="center">
@@ -71,7 +72,6 @@ export default function Navbar() {
         <Login />
         <br/>
         <Logout />
-        
         <Switch>
           <Route path="/ver-nlus">
             <VerNLUs />
@@ -87,8 +87,8 @@ export default function Navbar() {
           </Route>
           <Route path="/"></Route>
         </Switch>
-
         <NavbarButton />
+        {console.log(cookie[0])}
       </div>
     </Router>
   );
