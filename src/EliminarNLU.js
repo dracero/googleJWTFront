@@ -21,7 +21,11 @@ const EliminarNLU = () => {
     event.preventDefault()
   
     axios
-      .delete(process.env.REACT_APP_URL + "nlu_structure/" + id)
+      .delete(process.env.REACT_APP_URL + "nlu_structure/" + id,{
+        headers: {
+          'Authorization': `Bearer ${cookie[0]}`
+         }
+        })
       .then(returnedNLU => {
         dispatch(stateActions.state('Success'));
         dispatch(nluActions.data({id: '', name: '', text: ''}));
